@@ -1,25 +1,25 @@
 ---
+  - name: Determine Ambari-Agent Node
+    stat: path=/usr/sbin/ambari-agent get_md5=no
+    register: file
+  - name: Stopping ambari agent on rhel/centos/oel 6
+    when: (ansible_os_family == "RedHat" and ansible_distribution_major_version == "6" and file.stat.exists == true)
+    service: name=ambari-server state=stopped 
+  - name: Determine Ambari-Agent Node
+    stat: path=/usr/sbin/ambari-agent get_md5=no
+    register: file
+  - name: Stopping ambari agent on rhel/centos/oel 7 
+    when: (ansible_os_family == "RedHat" and ansible_distribution_major_version == "7" and file.stat.exists == true)
+    command: systemctl stop ambari-agent
   - name: Determine Ambari-Server Node
     stat: path=/usr/sbin/ambari-server get_md5=no
     register: file
   - name: Stopping ambari Server on rhel/centos/oel 6
     when: (ansible_os_family == "RedHat" and ansible_distribution_major_version == "6" and file.stat.exists == true)
-    command: service ambari-server stop
+    service: name=ambari-server state=stopped 
   - name: Determine Ambari-Server Node
     stat: path=/usr/sbin/ambari-server get_md5=no
     register: file
   - name: Stopping ambari Server on rhel/centos/oel 7
     when: (ansible_os_family == "RedHat" and ansible_distribution_major_version == "7" and file.stat.exists == true)
     command: systemctl stop ambari-server
-  - name: Determine Ambari-Server Node
-    stat: path=/usr/sbin/ambari-agent get_md5=no
-    register: file
-  - name: Stopping ambari agent on rhel/centos/oel 6
-    when: (ansible_os_family == "RedHat" and ansible_distribution_major_version == "6" and file.stat.exists == true)
-    command: service ambari-agent stop
-  - name: Determine Ambari-Server Node
-    stat: path=/usr/sbin/ambari-agent get_md5=no
-    register: file
-  - name: Stopping ambari agent on rhel/centos/oel 7 
-    when: (ansible_os_family == "RedHat" and ansible_distribution_major_version == "7" and file.stat.exists == true)
-    command: systemctl stop ambari-agent
