@@ -6,5 +6,8 @@
   gather_facts: "{{ var_gather_facts }}"
   vars_files: 
          - ambari_upgrade/vars/main.yml
+  
   roles:
+    - stop_ambari
     - ambari_upgrade
+    - start_ambari
