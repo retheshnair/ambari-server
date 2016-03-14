@@ -1,4 +1,4 @@
---- #PLAYBOOK FOR OS UPDATE USING YUM
+--- #PLAYBOOK FOR AMBARI UPGRADE
 - hosts: "{{ var_hosts }}"
   user: "{{ var_remote_user }}"
   sudo: "{{ var_sudo }}"
